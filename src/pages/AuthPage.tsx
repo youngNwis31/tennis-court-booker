@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+type Mode = "signIn" | "signUp" | "forgotPassword";
+
 export function AuthPage() {
-  const { user, signIn, signUp, signInWithGoogle } = useAuth();
-  const [isSignUp, setIsSignUp] = useState(false);
+  const { user, signIn, signUp, signInWithGoogle, resetPassword } = useAuth();
+  const [mode, setMode] = useState<Mode>("signIn");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -13,13 +15,27 @@ export function AuthPage() {
 
   if (user) return <Navigate to="/" replace />;
 
+  const switchMode = (next: Mode) => {
+    setMode(next);
+    setError(null);
+    setMessage(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setMessage(null);
     setSubmitting(true);
 
-    if (isSignUp) {
+    if (mode === "forgotPassword") {
+      const { error } = await resetPassword(email);
+      if (error) {
+        setError(error);
+      } else {
+        setMessage("Check your email for a password reset link!");
+        setEmail("");
+      }
+    } else if (mode === "signUp") {
       const { error } = await signUp(email, password);
       if (error) {
         setError(error);
@@ -41,11 +57,17 @@ export function AuthPage() {
       <div className="text-center mb-8">
         <span className="text-5xl">🎾</span>
         <h1 className="text-2xl font-bold text-gray-900 mt-4">
-          {isSignUp ? "Create an account" : "Welcome back"}
+          {mode === "signUp"
+            ? "Create an account"
+            : mode === "forgotPassword"
+            ? "Reset your password"
+            : "Welcome back"}
         </h1>
         <p className="text-gray-500 mt-2">
-          {isSignUp
+          {mode === "signUp"
             ? "Sign up to start booking courts"
+            : mode === "forgotPassword"
+            ? "We'll send you a link to reset your password"
             : "Sign in to manage your bookings"}
         </p>
       </div>
@@ -96,20 +118,34 @@ export function AuthPage() {
               placeholder="you@example.com"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-              placeholder="At least 6 characters"
-            />
-          </div>
+          {mode !== "forgotPassword" && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                placeholder="At least 6 characters"
+              />
+            </div>
+          )}
+
+          {mode === "signIn" && (
+            <div className="text-right">
+              <button
+                type="button"
+                onClick={() => switchMode("forgotPassword")}
+                className="text-sm text-emerald-600 hover:underline"
+              >
+                Forgot password?
+              </button>
+            </div>
+          )}
 
           {error && (
             <p className="text-sm text-red-600 bg-red-50 rounded-lg p-3">{error}</p>
@@ -127,24 +163,37 @@ export function AuthPage() {
           >
             {submitting
               ? "Please wait..."
-              : isSignUp
+              : mode === "signUp"
               ? "Sign Up"
+              : mode === "forgotPassword"
+              ? "Send Reset Link"
               : "Sign In"}
           </button>
         </form>
 
         <p className="text-sm text-gray-500 text-center mt-6">
-          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-          <button
-            onClick={() => {
-              setIsSignUp(!isSignUp);
-              setError(null);
-              setMessage(null);
-            }}
-            className="text-emerald-600 font-medium hover:underline"
-          >
-            {isSignUp ? "Sign in" : "Sign up"}
-          </button>
+          {mode === "forgotPassword" ? (
+            <>
+              Remember your password?{" "}
+              <button onClick={() => switchMode("signIn")} className="text-emerald-600 font-medium hover:underline">
+                Sign in
+              </button>
+            </>
+          ) : mode === "signUp" ? (
+            <>
+              Already have an account?{" "}
+              <button onClick={() => switchMode("signIn")} className="text-emerald-600 font-medium hover:underline">
+                Sign in
+              </button>
+            </>
+          ) : (
+            <>
+              Don't have an account?{" "}
+              <button onClick={() => switchMode("signUp")} className="text-emerald-600 font-medium hover:underline">
+                Sign up
+              </button>
+            </>
+          )}
         </p>
       </div>
     </div>

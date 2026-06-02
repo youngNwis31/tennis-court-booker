@@ -28,9 +28,9 @@ export function Navbar() {
               <Link to="/bookings" className={linkClass("/bookings")}>
                 My Bookings
               </Link>
-              <span className="text-sm text-gray-400 ml-2 hidden sm:inline">
-                {user.email}
-              </span>
+              <Link to="/profile" className={linkClass("/profile")}>
+                Profile
+              </Link>
               <button
                 onClick={signOut}
                 className="px-3 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-100 transition-colors"
