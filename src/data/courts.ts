@@ -1,0 +1,58 @@
+import type { Court } from "../types";
+
+export const courts: Court[] = [
+  {
+    id: "1",
+    name: "Sunset Park Courts",
+    location: "123 Sunset Blvd",
+    surface: "hard",
+    indoor: false,
+    emoji: "🌅",
+    hourlyRate: 25,
+  },
+  {
+    id: "2",
+    name: "Green Valley Tennis Club",
+    location: "456 Valley Dr",
+    surface: "grass",
+    indoor: false,
+    emoji: "🌿",
+    hourlyRate: 40,
+  },
+  {
+    id: "3",
+    name: "Downtown Indoor Arena",
+    location: "789 Main St",
+    surface: "hard",
+    indoor: true,
+    emoji: "🏢",
+    hourlyRate: 35,
+  },
+  {
+    id: "4",
+    name: "Riverside Clay Courts",
+    location: "321 River Rd",
+    surface: "clay",
+    indoor: false,
+    emoji: "🏞️",
+    hourlyRate: 30,
+  },
+  {
+    id: "5",
+    name: "Hilltop Tennis Center",
+    location: "555 Hill Ave",
+    surface: "hard",
+    indoor: true,
+    emoji: "⛰️",
+    hourlyRate: 30,
+  },
+  {
+    id: "6",
+    name: "Lakeside Grass Courts",
+    location: "888 Lake Ln",
+    surface: "grass",
+    indoor: false,
+    emoji: "🏖️",
+    hourlyRate: 45,
+  },
+];
