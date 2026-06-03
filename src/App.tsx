@@ -13,6 +13,7 @@ import { ComparePage } from "./pages/ComparePage";
 import { MatchmakingPage } from "./pages/MatchmakingPage";
 import { AnalyticsPage } from "./pages/AnalyticsPage";
 import { MapPage } from "./pages/MapPage";
+import { QuizPage } from "./pages/QuizPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ChatBot } from "./components/ChatBot";
 
@@ -30,6 +31,7 @@ export default function App() {
                 <Route path="/court/:id" element={<CourtDetailPage />} />
                 <Route path="/compare" element={<ComparePage />} />
                 <Route path="/map" element={<MapPage />} />
+                <Route path="/quiz" element={<QuizPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/reset-password" element={<ResetPasswordPage />} />
                 <Route

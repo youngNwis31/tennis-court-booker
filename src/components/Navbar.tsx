@@ -25,6 +25,7 @@ export function Navbar() {
           <Link to="/" className={linkClass("/")}>Courts</Link>
           <Link to="/compare" className={linkClass("/compare")}>Compare</Link>
           <Link to="/map" className={linkClass("/map")}>Map</Link>
+          <Link to="/quiz" className={linkClass("/quiz")}>Quiz</Link>
           {user ? (
             <>
               <Link to="/bookings" className={linkClass("/bookings")}>Bookings</Link>

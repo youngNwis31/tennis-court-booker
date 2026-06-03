@@ -3,6 +3,8 @@ import { courts } from "../data/courts";
 import { CourtCard } from "../components/CourtCard";
 import type { Court } from "../types";
 import { SmartRecommendations } from "../components/SmartRecommendations";
+import { OptimalSlotFinder } from "../components/OptimalSlotFinder";
+import { PriceAlert } from "../components/PriceAlert";
 
 const SURFACES: Array<Court["surface"] | "all"> = ["all", "hard", "clay", "grass"];
 const CITIES = ["all", ...Array.from(new Set(courts.map((c) => c.city))).sort()];
@@ -95,6 +97,8 @@ export function HomePage() {
       </div>
 
       <SmartRecommendations />
+      <OptimalSlotFinder />
+      <PriceAlert />
 
       {/* Search + Filters */}
       <div className="space-y-4 mb-6">

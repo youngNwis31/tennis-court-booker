@@ -2,6 +2,7 @@ import { useUserBookings } from "../hooks/useBookings";
 import { useAuth } from "../context/AuthContext";
 import { courts } from "../data/courts";
 import { calculateBadges, BadgeGrid } from "../components/Achievements";
+import { StreakDisplay } from "../components/StreakTracker";
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import type { Review } from "../types";
@@ -119,6 +120,8 @@ export function AnalyticsPage() {
     <div>
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Your Stats</h1>
       <p className="text-gray-500 dark:text-gray-400 mb-6">Analytics and achievements for your tennis journey</p>
+
+      <StreakDisplay bookings={bookings} />
 
       {/* Summary cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
