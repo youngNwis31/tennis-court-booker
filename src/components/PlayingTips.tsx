@@ -1,5 +1,5 @@
 import type { Court } from "../types";
-import { useWeather, getWeatherInfo, isRainy } from "../hooks/useWeather";
+import { useWeather, isRainy } from "../hooks/useWeather";
 
 interface Props {
   court: Court;
