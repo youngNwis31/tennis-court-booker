@@ -2,12 +2,14 @@ export interface Court {
   id: string;
   name: string;
   location: string;
+  city: string;
   surface: "hard" | "clay" | "grass";
   indoor: boolean;
   emoji: string;
   hourlyRate: number;
   lat: number;
   lng: number;
+  photos: string[];
 }
 
 export interface Review {

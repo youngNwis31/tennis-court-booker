@@ -7,11 +7,14 @@ import { TimeSlotPicker } from "../components/TimeSlotPicker";
 import { WeatherBanner } from "../components/WeatherBanner";
 import { ReviewSection } from "../components/ReviewSection";
 import { AvailabilityHeatmap } from "../components/AvailabilityHeatmap";
+import { PhotoGallery } from "../components/PhotoGallery";
+import { useToast } from "../components/Toast";
 
 export function CourtDetailPage() {
   const { id } = useParams<{ id: string }>();
   const court = courts.find((c) => c.id === id);
   const { user } = useAuth();
+  const { showToast } = useToast();
 
   const today = new Date().toISOString().split("T")[0];
   const [date, setDate] = useState(today);
@@ -42,9 +45,11 @@ export function CourtDetailPage() {
     const { error } = await addBooking(court.id, date, selectedHour);
     if (error) {
       setError(error);
+      showToast(error, "error");
     } else {
       setConfirmed(true);
       setSelectedHour(null);
+      showToast("Booking confirmed! 🎾", "success");
       await refresh();
     }
     setSubmitting(false);
@@ -56,10 +61,14 @@ export function CourtDetailPage() {
         ← Back to courts
       </Link>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-6">
-        <div className="h-48 bg-gray-100 flex items-center justify-center text-8xl">
-          {court.emoji}
-        </div>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
+        {court.photos.length > 0 ? (
+          <PhotoGallery photos={court.photos} alt={court.name} />
+        ) : (
+          <div className="h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-8xl">
+            {court.emoji}
+          </div>
+        )}
         <div className="p-6">
           <h1 className="text-2xl font-bold text-gray-900">{court.name}</h1>
           <p className="text-gray-500 mt-1">{court.location}</p>
