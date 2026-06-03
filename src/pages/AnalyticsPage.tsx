@@ -127,7 +127,7 @@ export function AnalyticsPage() {
           <p className="text-sm text-gray-500 dark:text-gray-400">Total Bookings</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-          <p className="text-3xl font-bold text-emerald-600">${totalSpent}</p>
+          <p className="text-3xl font-bold text-emerald-600">₱{totalSpent.toLocaleString()}</p>
           <p className="text-sm text-gray-500 dark:text-gray-400">Total Spent</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">

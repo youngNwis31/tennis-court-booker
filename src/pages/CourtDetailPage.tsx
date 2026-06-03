@@ -73,7 +73,7 @@ export function CourtDetailPage() {
               </span>
             )}
             <span className="text-emerald-600 font-semibold ml-auto text-lg">
-              ${court.hourlyRate}/hr
+              ₱{court.hourlyRate}/hr
             </span>
           </div>
         </div>

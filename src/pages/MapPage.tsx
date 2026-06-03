@@ -45,7 +45,7 @@ function CourtPopup({ courtId }: { courtId: string }) {
           </span>
         )}
         <span className="text-xs font-semibold text-emerald-600 ml-auto">
-          ${court.hourlyRate}/hr
+          ₱{court.hourlyRate}/hr
         </span>
       </div>
       {reviews.length > 0 && (
@@ -104,7 +104,7 @@ export function MapPage() {
             <span className="text-2xl">{court.emoji}</span>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{court.name}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{court.surface} • ${court.hourlyRate}/hr</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{court.surface} • ₱{court.hourlyRate}/hr</p>
             </div>
           </Link>
         ))}

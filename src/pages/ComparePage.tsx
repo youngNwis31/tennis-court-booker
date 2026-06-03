@@ -30,7 +30,7 @@ function CourtCompareCard({ court, onRemove }: { court: Court; onRemove: () => v
         {/* Price */}
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-500">Price</span>
-          <span className="font-semibold text-emerald-600">${court.hourlyRate}/hr</span>
+          <span className="font-semibold text-emerald-600">₱{court.hourlyRate}/hr</span>
         </div>
 
         {/* Surface */}
@@ -63,7 +63,7 @@ function CourtCompareCard({ court, onRemove }: { court: Court; onRemove: () => v
           <span className="text-sm text-gray-500">Today</span>
           {weatherInfo ? (
             <span className="text-sm">
-              {weatherInfo.emoji} {todayWeather!.tempMax}°F
+              {weatherInfo.emoji} {todayWeather!.tempMax}°C
             </span>
           ) : (
             <span className="text-xs text-gray-400">Loading...</span>

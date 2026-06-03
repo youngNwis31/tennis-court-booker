@@ -45,7 +45,7 @@ export function useWeather(lat: number, lng: number) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max&timezone=auto&forecast_days=3&temperature_unit=fahrenheit`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max&timezone=auto&forecast_days=3&temperature_unit=celsius`;
 
     fetch(url)
       .then((res) => res.json())

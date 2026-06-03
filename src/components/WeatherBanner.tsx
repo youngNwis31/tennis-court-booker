@@ -43,7 +43,7 @@ export function WeatherBanner({ court }: Props) {
               <p className="text-2xl my-1">{info.emoji}</p>
               <p className="text-xs font-medium text-gray-700">{info.label}</p>
               <p className="text-xs text-gray-500 mt-1">
-                {day.tempMin}° – {day.tempMax}°F
+                {day.tempMin}° – {day.tempMax}°C
               </p>
               {day.precipProbability > 0 && (
                 <p className="text-xs text-blue-600 mt-1">

@@ -37,7 +37,7 @@ export function CourtCard({ court }: { court: Court }) {
         </div>
         <div className="flex items-center justify-between mt-3">
           <p className="text-emerald-600 font-semibold">
-            ${court.hourlyRate}/hr
+            ₱{court.hourlyRate}/hr
           </p>
           {reviews.length > 0 && (
             <div className="flex items-center gap-1">

@@ -90,7 +90,7 @@ export function useRecommendations(bookings: Booking[]): Recommendation[] {
         type: "try-new",
         emoji: "✨",
         title: `Try ${suggested.name}`,
-        description: `You haven't played here yet — it's a ${suggested.surface} court at $${suggested.hourlyRate}/hr.`,
+        description: `You haven't played here yet — it's a ${suggested.surface} court at ₱${suggested.hourlyRate}/hr.`,
         courtId: suggested.id,
         link: `/court/${suggested.id}`,
       });

@@ -29,7 +29,7 @@ const faqs: FAQ[] = [
   {
     question: "How much does it cost?",
     answer:
-      "Prices vary by court — from $25/hr for outdoor hard courts to $45/hr for grass courts. You can see the hourly rate on each court's card and detail page.",
+      "Prices vary by court — from ₱100/hr for public courts to ₱1,500/hr for premium indoor courts. You can see the hourly rate on each court's card and detail page.",
     keywords: ["cost", "price", "how much", "rate", "fee", "pay", "expensive", "cheap"],
     followUps: ["Show me cheap courts", "What surfaces are available?"],
   },
@@ -64,7 +64,7 @@ const faqs: FAQ[] = [
   {
     question: "Are there indoor courts?",
     answer:
-      "Yes! We have indoor courts available — Downtown Indoor Arena ($35/hr) and Hilltop Tennis Center ($30/hr). Look for the 'indoor' badge on court cards. Perfect for rainy days!",
+      "Yes! We have indoor courts — Makati Indoor Tennis Court (₱800/hr) and Kerry Sports Manila in BGC (₱1,500/hr). Look for the 'indoor' badge on court cards. Perfect for rainy season!",
     keywords: ["indoor", "inside", "covered", "rain", "weather"],
     followUps: ["How much does it cost?", "What's the weather like?"],
   },
@@ -241,7 +241,7 @@ export function ChatBot() {
         const time = `${h > 12 ? h - 12 : h}:00 ${h >= 12 ? "PM" : "AM"}`;
         const dateStr = new Date(date + "T00:00").toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" });
         return {
-          text: `Done! I booked ${court.name} (${court.surface}) for you on ${dateStr} at ${time}. 🎉\n\nPrice: $${court.hourlyRate}/hr\n\nYou can manage it from My Bookings.`,
+          text: `Done! I booked ${court.name} (${court.surface}) for you on ${dateStr} at ${time}. 🎉\n\nPrice: ₱${court.hourlyRate}/hr\n\nYou can manage it from My Bookings.`,
           followUps: ["What's my next booking?", "Can I cancel a booking?"],
         };
       }
@@ -288,7 +288,7 @@ export function ChatBot() {
       const sorted = [...courts].sort((a, b) => a.hourlyRate - b.hourlyRate);
       const top3 = sorted.slice(0, 3);
       return {
-        text: `Here are the most affordable courts:\n\n${top3.map((c) => `${c.emoji} ${c.name} — $${c.hourlyRate}/hr (${c.surface})`).join("\n")}`,
+        text: `Here are the most affordable courts:\n\n${top3.map((c) => `${c.emoji} ${c.name} — ₱${c.hourlyRate}/hr (${c.surface})`).join("\n")}`,
         followUps: ["How do I book a court?", "What surfaces are available?"],
       };
     }
@@ -299,7 +299,7 @@ export function ChatBot() {
         const matching = courts.filter((c) => c.surface === surface);
         if (matching.length > 0) {
           return {
-            text: `Here are our ${surface} courts:\n\n${matching.map((c) => `${c.emoji} ${c.name} — $${c.hourlyRate}/hr${c.indoor ? " (indoor)" : ""}`).join("\n")}`,
+            text: `Here are our ${surface} courts:\n\n${matching.map((c) => `${c.emoji} ${c.name} — ₱${c.hourlyRate}/hr${c.indoor ? " (indoor)" : ""}`).join("\n")}`,
             followUps: ["How much does it cost?", "Are there indoor courts?"],
           };
         }
@@ -310,7 +310,7 @@ export function ChatBot() {
     if (lower.includes("indoor")) {
       const indoor = courts.filter((c) => c.indoor);
       return {
-        text: `We have ${indoor.length} indoor courts:\n\n${indoor.map((c) => `${c.emoji} ${c.name} — $${c.hourlyRate}/hr (${c.surface})`).join("\n")}`,
+        text: `We have ${indoor.length} indoor courts:\n\n${indoor.map((c) => `${c.emoji} ${c.name} — ₱${c.hourlyRate}/hr (${c.surface})`).join("\n")}`,
         followUps: ["How do I book a court?", "What's the weather like?"],
       };
     }
