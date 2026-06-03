@@ -9,6 +9,8 @@ export const courts: Court[] = [
     indoor: false,
     emoji: "🌅",
     hourlyRate: 25,
+    lat: 34.0522,
+    lng: -118.2437,
   },
   {
     id: "2",
@@ -18,6 +20,8 @@ export const courts: Court[] = [
     indoor: false,
     emoji: "🌿",
     hourlyRate: 40,
+    lat: 34.0622,
+    lng: -118.2537,
   },
   {
     id: "3",
@@ -27,6 +31,8 @@ export const courts: Court[] = [
     indoor: true,
     emoji: "🏢",
     hourlyRate: 35,
+    lat: 34.0407,
+    lng: -118.2468,
   },
   {
     id: "4",
@@ -36,6 +42,8 @@ export const courts: Court[] = [
     indoor: false,
     emoji: "🏞️",
     hourlyRate: 30,
+    lat: 34.0722,
+    lng: -118.2337,
   },
   {
     id: "5",
@@ -45,6 +53,8 @@ export const courts: Court[] = [
     indoor: true,
     emoji: "⛰️",
     hourlyRate: 30,
+    lat: 34.0822,
+    lng: -118.2637,
   },
   {
     id: "6",
@@ -54,5 +64,7 @@ export const courts: Court[] = [
     indoor: false,
     emoji: "🏖️",
     hourlyRate: 45,
+    lat: 34.0322,
+    lng: -118.2737,
   },
 ];

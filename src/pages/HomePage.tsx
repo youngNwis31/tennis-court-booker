@@ -2,6 +2,7 @@ import { useState } from "react";
 import { courts } from "../data/courts";
 import { CourtCard } from "../components/CourtCard";
 import type { Court } from "../types";
+import { SmartRecommendations } from "../components/SmartRecommendations";
 
 const SURFACES: Array<Court["surface"] | "all"> = ["all", "hard", "clay", "grass"];
 
@@ -26,6 +27,8 @@ export function HomePage() {
           Browse available tennis courts and book your next session
         </p>
       </div>
+
+      <SmartRecommendations />
 
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <input

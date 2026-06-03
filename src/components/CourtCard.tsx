@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Court } from "../types";
+import { useCourtReviews } from "../hooks/useReviews";
+import { StarRating } from "./StarRating";
 
 const surfaceColors: Record<Court["surface"], string> = {
   hard: "bg-blue-100 text-blue-700",
@@ -8,6 +10,8 @@ const surfaceColors: Record<Court["surface"], string> = {
 };
 
 export function CourtCard({ court }: { court: Court }) {
+  const { reviews, avgRating } = useCourtReviews(court.id);
+
   return (
     <Link
       to={`/court/${court.id}`}
@@ -31,9 +35,17 @@ export function CourtCard({ court }: { court: Court }) {
             </span>
           )}
         </div>
-        <p className="text-emerald-600 font-semibold mt-3">
-          ${court.hourlyRate}/hr
-        </p>
+        <div className="flex items-center justify-between mt-3">
+          <p className="text-emerald-600 font-semibold">
+            ${court.hourlyRate}/hr
+          </p>
+          {reviews.length > 0 && (
+            <div className="flex items-center gap-1">
+              <StarRating rating={Math.round(avgRating)} size="sm" />
+              <span className="text-xs text-gray-400">({reviews.length})</span>
+            </div>
+          )}
+        </div>
       </div>
     </Link>
   );
