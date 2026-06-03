@@ -6,7 +6,7 @@ export function Navbar() {
   const { user, signOut } = useAuth();
 
   const linkClass = (path: string) =>
-    `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+    `px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
       pathname === path
         ? "bg-emerald-600 text-white"
         : "text-gray-600 hover:bg-gray-100"
@@ -15,18 +15,24 @@ export function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-10">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 text-xl font-bold text-gray-900">
+        <Link to="/" className="flex items-center gap-2 text-xl font-bold text-gray-900 shrink-0">
           <span>🎾</span>
-          <span>CourtBook</span>
+          <span className="hidden sm:inline">CourtBook</span>
         </Link>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 overflow-x-auto">
           <Link to="/" className={linkClass("/")}>
             Courts
+          </Link>
+          <Link to="/compare" className={linkClass("/compare")}>
+            Compare
           </Link>
           {user ? (
             <>
               <Link to="/bookings" className={linkClass("/bookings")}>
-                My Bookings
+                Bookings
+              </Link>
+              <Link to="/matchmaking" className={linkClass("/matchmaking")}>
+                Find Partner
               </Link>
               <Link to="/profile" className={linkClass("/profile")}>
                 Profile

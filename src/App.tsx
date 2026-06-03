@@ -7,6 +7,8 @@ import { MyBookingsPage } from "./pages/MyBookingsPage";
 import { AuthPage } from "./pages/AuthPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { ComparePage } from "./pages/ComparePage";
+import { MatchmakingPage } from "./pages/MatchmakingPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ChatBot } from "./components/ChatBot";
 
@@ -20,6 +22,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/court/:id" element={<CourtDetailPage />} />
+              <Route path="/compare" element={<ComparePage />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route
@@ -35,6 +38,14 @@ export default function App() {
                 element={
                   <ProtectedRoute>
                     <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/matchmaking"
+                element={
+                  <ProtectedRoute>
+                    <MatchmakingPage />
                   </ProtectedRoute>
                 }
               />

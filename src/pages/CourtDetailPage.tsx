@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { TimeSlotPicker } from "../components/TimeSlotPicker";
 import { WeatherBanner } from "../components/WeatherBanner";
 import { ReviewSection } from "../components/ReviewSection";
+import { AvailabilityHeatmap } from "../components/AvailabilityHeatmap";
 
 export function CourtDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -79,6 +80,7 @@ export function CourtDetailPage() {
       </div>
 
       <WeatherBanner court={court} />
+      <AvailabilityHeatmap courtId={court.id} />
 
       {confirmed && (
         <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6 flex items-center justify-between">

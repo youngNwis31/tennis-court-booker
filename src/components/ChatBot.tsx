@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useUserBookings } from "../hooks/useBookings";
+import { useUserBookings, useBookingActions } from "../hooks/useBookings";
 import { courts } from "../data/courts";
+import { supabase } from "../lib/supabase";
 
 interface Message {
   id: number;
@@ -134,9 +135,61 @@ const GREETING: Message = {
   ],
 };
 
+function parseBookingIntent(input: string): { surface?: string; date?: string; hour?: number } | null {
+  const lower = input.toLowerCase();
+  if (!lower.includes("book")) return null;
+
+  const result: { surface?: string; date?: string; hour?: number } = {};
+
+  // Parse surface
+  if (lower.includes("hard")) result.surface = "hard";
+  else if (lower.includes("clay")) result.surface = "clay";
+  else if (lower.includes("grass")) result.surface = "grass";
+
+  // Parse date
+  const today = new Date();
+  if (lower.includes("today")) {
+    result.date = today.toISOString().split("T")[0];
+  } else if (lower.includes("tomorrow")) {
+    const tmr = new Date(today);
+    tmr.setDate(tmr.getDate() + 1);
+    result.date = tmr.toISOString().split("T")[0];
+  } else {
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    for (let i = 0; i < days.length; i++) {
+      if (lower.includes(days[i])) {
+        const target = new Date(today);
+        const diff = (i - today.getDay() + 7) % 7 || 7;
+        target.setDate(target.getDate() + diff);
+        result.date = target.toISOString().split("T")[0];
+        break;
+      }
+    }
+  }
+
+  // Parse time
+  const timeMatch = lower.match(/(\d{1,2})\s*(am|pm|:\d{2})/i);
+  if (timeMatch) {
+    let hour = parseInt(timeMatch[1]);
+    if (timeMatch[2].toLowerCase() === "pm" && hour < 12) hour += 12;
+    if (timeMatch[2].toLowerCase() === "am" && hour === 12) hour = 0;
+    if (hour >= 7 && hour <= 20) result.hour = hour;
+  } else if (lower.includes("morning")) {
+    result.hour = 9;
+  } else if (lower.includes("afternoon")) {
+    result.hour = 14;
+  } else if (lower.includes("evening")) {
+    result.hour = 18;
+  }
+
+  if (!result.surface && !result.date && !result.hour) return null;
+  return result;
+}
+
 export function ChatBot() {
   const { user } = useAuth();
   const { bookings } = useUserBookings();
+  const { addBooking } = useBookingActions();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([GREETING]);
   const [input, setInput] = useState("");
@@ -152,6 +205,54 @@ export function ChatBot() {
   useEffect(() => {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
+
+  // Handle booking through chat
+  async function handleBookingIntent(input: string): Promise<{ text: string; followUps?: string[] } | null> {
+    const intent = parseBookingIntent(input);
+    if (!intent) return null;
+    if (!user) return { text: "You need to sign in before I can book a court for you!", followUps: ["Do I need an account?"] };
+
+    // Default to today if no date
+    const date = intent.date ?? new Date().toISOString().split("T")[0];
+    const hour = intent.hour ?? 10; // default 10 AM
+
+    // Find matching court
+    let candidates = [...courts];
+    if (intent.surface) {
+      candidates = candidates.filter((c) => c.surface === intent.surface);
+    }
+
+    // Try each candidate until we find one with the slot available
+    for (const court of candidates) {
+      const { data } = await supabase
+        .from("bookings")
+        .select("id")
+        .eq("court_id", court.id)
+        .eq("date", date)
+        .eq("start_hour", hour);
+
+      if ((data ?? []).length === 0) {
+        // Slot is available — book it!
+        const { error } = await addBooking(court.id, date, hour);
+        if (error) {
+          return { text: `I found an available slot but couldn't book it: ${error}`, followUps: ["How do I book a court?"] };
+        }
+        const h = hour;
+        const time = `${h > 12 ? h - 12 : h}:00 ${h >= 12 ? "PM" : "AM"}`;
+        const dateStr = new Date(date + "T00:00").toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" });
+        return {
+          text: `Done! I booked ${court.name} (${court.surface}) for you on ${dateStr} at ${time}. 🎉\n\nPrice: $${court.hourlyRate}/hr\n\nYou can manage it from My Bookings.`,
+          followUps: ["What's my next booking?", "Can I cancel a booking?"],
+        };
+      }
+    }
+
+    const time = `${hour > 12 ? hour - 12 : hour}:00 ${hour >= 12 ? "PM" : "AM"}`;
+    return {
+      text: `Sorry, no ${intent.surface ? intent.surface + " " : ""}courts are available at ${time} on that date. Try a different time or surface!`,
+      followUps: ["Show me cheap courts", "What are the available hours?"],
+    };
+  }
 
   // Dynamic answers based on user context
   function getDynamicAnswer(input: string): { text: string; followUps?: string[] } | null {
@@ -288,6 +389,22 @@ export function ChatBot() {
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setIsTyping(true);
+
+    // Check if it's a booking intent (async)
+    const bookingIntent = parseBookingIntent(text);
+    if (bookingIntent) {
+      handleBookingIntent(text).then((result) => {
+        const botMsg: Message = {
+          id: nextId.current++,
+          text: result?.text ?? "Something went wrong with the booking.",
+          isBot: true,
+          followUps: result?.followUps,
+        };
+        setMessages((prev) => [...prev, botMsg]);
+        setIsTyping(false);
+      });
+      return;
+    }
 
     setTimeout(() => {
       const { text: answer, followUps } = findAnswer(text);
