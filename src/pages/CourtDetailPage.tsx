@@ -9,6 +9,9 @@ import { ReviewSection } from "../components/ReviewSection";
 import { AvailabilityHeatmap } from "../components/AvailabilityHeatmap";
 import { PhotoGallery } from "../components/PhotoGallery";
 import { useToast } from "../components/Toast";
+import { PlayingTips } from "../components/PlayingTips";
+import { ShareBooking } from "../components/ShareBooking";
+import { FavoriteButton } from "../components/FavoriteButton";
 
 export function CourtDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -81,28 +84,35 @@ export function CourtDetailPage() {
                 indoor
               </span>
             )}
-            <span className="text-emerald-600 font-semibold ml-auto text-lg">
-              ₱{court.hourlyRate}/hr
-            </span>
+            <div className="flex items-center gap-3 ml-auto">
+              <span className="text-emerald-600 font-semibold text-lg">
+                ₱{court.hourlyRate}/hr
+              </span>
+              <FavoriteButton courtId={court.id} />
+            </div>
           </div>
         </div>
       </div>
 
+      <PlayingTips court={court} selectedHour={selectedHour} />
       <WeatherBanner court={court} />
       <AvailabilityHeatmap courtId={court.id} />
 
       {confirmed && (
-        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6 flex items-center justify-between">
-          <p className="text-emerald-800 font-medium">
-            Booking confirmed! Check{" "}
-            <Link to="/bookings" className="underline">
-              My Bookings
-            </Link>{" "}
-            to view it.
-          </p>
-          <button onClick={() => setConfirmed(false)} className="text-emerald-600 hover:text-emerald-800">
-            ✕
-          </button>
+        <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-xl p-4 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-emerald-800 dark:text-emerald-300 font-medium">
+              Booking confirmed! Check{" "}
+              <Link to="/bookings" className="underline">
+                My Bookings
+              </Link>{" "}
+              to view it.
+            </p>
+            <button onClick={() => setConfirmed(false)} className="text-emerald-600 hover:text-emerald-800">
+              ✕
+            </button>
+          </div>
+          <ShareBooking courtId={court.id} date={date} hour={selectedHour ?? 10} />
         </div>
       )}
 

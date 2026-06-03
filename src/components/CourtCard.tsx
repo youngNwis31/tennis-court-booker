@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Court } from "../types";
 import { useCourtReviews } from "../hooks/useReviews";
 import { StarRating } from "./StarRating";
+import { FavoriteButton } from "./FavoriteButton";
 
 const surfaceColors: Record<Court["surface"], string> = {
   hard: "bg-blue-100 text-blue-700",
@@ -37,9 +38,12 @@ export function CourtCard({ court, distance }: Props) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-        {/* Price badge */}
-        <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-emerald-500 text-white text-sm font-bold shadow-lg">
-          ₱{court.hourlyRate}/hr
+        {/* Price badge + Favorite */}
+        <div className="absolute top-3 right-3 flex items-center gap-2">
+          <FavoriteButton courtId={court.id} />
+          <div className="px-3 py-1 rounded-full bg-emerald-500 text-white text-sm font-bold shadow-lg">
+            ₱{court.hourlyRate}/hr
+          </div>
         </div>
 
         {/* Indoor badge */}

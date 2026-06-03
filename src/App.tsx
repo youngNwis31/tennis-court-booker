@@ -14,6 +14,8 @@ import { MatchmakingPage } from "./pages/MatchmakingPage";
 import { AnalyticsPage } from "./pages/AnalyticsPage";
 import { MapPage } from "./pages/MapPage";
 import { QuizPage } from "./pages/QuizPage";
+import { CalendarPage } from "./pages/CalendarPage";
+import { FavoritesPage } from "./pages/FavoritesPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ChatBot } from "./components/ChatBot";
 
@@ -32,6 +34,15 @@ export default function App() {
                 <Route path="/compare" element={<ComparePage />} />
                 <Route path="/map" element={<MapPage />} />
                 <Route path="/quiz" element={<QuizPage />} />
+                <Route path="/favorites" element={<FavoritesPage />} />
+                <Route
+                  path="/calendar"
+                  element={
+                    <ProtectedRoute>
+                      <CalendarPage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/reset-password" element={<ResetPasswordPage />} />
                 <Route
