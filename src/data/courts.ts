@@ -1,6 +1,7 @@
 import type { Court } from "../types";
 
 export const courts: Court[] = [
+  // MANILA
   {
     id: "1",
     name: "Rizal Memorial Tennis Center",
@@ -14,50 +15,6 @@ export const courts: Court[] = [
   },
   {
     id: "2",
-    name: "Makati Indoor Tennis Court",
-    location: "L.P. Leviste St, Salcedo Village, Makati",
-    surface: "hard",
-    indoor: true,
-    emoji: "🏢",
-    hourlyRate: 800,
-    lat: 14.5609,
-    lng: 121.0233,
-  },
-  {
-    id: "3",
-    name: "Elorde Tennis Court",
-    location: "Arcadio Santos Ave, Parañaque",
-    surface: "hard",
-    indoor: false,
-    emoji: "🎾",
-    hourlyRate: 140,
-    lat: 14.4793,
-    lng: 121.0198,
-  },
-  {
-    id: "4",
-    name: "MWSS Tennis Court",
-    location: "489 Katipunan Rd, Balara, Quezon City",
-    surface: "clay",
-    indoor: false,
-    emoji: "🏞️",
-    hourlyRate: 100,
-    lat: 14.6504,
-    lng: 121.0748,
-  },
-  {
-    id: "5",
-    name: "UP Diliman Tennis Courts",
-    location: "Quezon Ave, UP Campus, Quezon City",
-    surface: "hard",
-    indoor: false,
-    emoji: "🎓",
-    hourlyRate: 150,
-    lat: 14.6538,
-    lng: 121.0685,
-  },
-  {
-    id: "6",
     name: "CCP Tennis Court",
     location: "CCP Complex, Roxas Blvd, Pasay City",
     surface: "hard",
@@ -68,7 +25,81 @@ export const courts: Court[] = [
     lng: 120.9817,
   },
   {
+    id: "3",
+    name: "PCA Tennis Courts",
+    location: "Quirino Ave Extension, Paco, Manila",
+    surface: "hard",
+    indoor: false,
+    emoji: "🏛️",
+    hourlyRate: 200,
+    lat: 14.5780,
+    lng: 120.9920,
+  },
+
+  // MAKATI
+  {
+    id: "4",
+    name: "Makati Indoor Tennis Court",
+    location: "L.P. Leviste St, Salcedo Village, Makati",
+    surface: "hard",
+    indoor: true,
+    emoji: "🏢",
+    hourlyRate: 150,
+    lat: 14.5609,
+    lng: 121.0233,
+  },
+  {
+    id: "5",
+    name: "Ascott Makati Tennis Court",
+    location: "Glorietta 4, Ayala Center, Makati",
+    surface: "grass",
+    indoor: false,
+    emoji: "🌿",
+    hourlyRate: 500,
+    lat: 14.5510,
+    lng: 121.0245,
+  },
+
+  // QUEZON CITY
+  {
+    id: "6",
+    name: "MWSS Tennis Court",
+    location: "489 Katipunan Rd, Balara, Quezon City",
+    surface: "clay",
+    indoor: false,
+    emoji: "🏞️",
+    hourlyRate: 100,
+    lat: 14.6504,
+    lng: 121.0748,
+  },
+  {
     id: "7",
+    name: "UP Diliman Tennis Courts",
+    location: "Quezon Ave, UP Campus, Quezon City",
+    surface: "hard",
+    indoor: false,
+    emoji: "🎓",
+    hourlyRate: 150,
+    lat: 14.6538,
+    lng: 121.0685,
+  },
+
+  // PARAÑAQUE
+  {
+    id: "8",
+    name: "Elorde Tennis Court",
+    location: "Arcadio Santos Ave, Parañaque",
+    surface: "hard",
+    indoor: false,
+    emoji: "🥊",
+    hourlyRate: 140,
+    lat: 14.4793,
+    lng: 121.0198,
+  },
+
+  // TAGUIG / BGC
+  {
+    id: "9",
     name: "Kerry Sports Manila",
     location: "Grand Hyatt, BGC, Taguig",
     surface: "hard",
@@ -79,7 +110,44 @@ export const courts: Court[] = [
     lng: 121.0509,
   },
   {
-    id: "8",
+    id: "10",
+    name: "Philippine Marine Corps Tennis Court",
+    location: "Fort Bonifacio, Taguig City",
+    surface: "hard",
+    indoor: false,
+    emoji: "⚓",
+    hourlyRate: 60,
+    lat: 14.5340,
+    lng: 121.0490,
+  },
+
+  // PASIG
+  {
+    id: "11",
+    name: "Meralco Tennis Courts",
+    location: "Meralco Compound, Ortigas Center, Pasig",
+    surface: "hard",
+    indoor: true,
+    emoji: "⚡",
+    hourlyRate: 200,
+    lat: 14.5872,
+    lng: 121.0615,
+  },
+  {
+    id: "12",
+    name: "Riverside Tennis Court",
+    location: "3rd St Clubhouse, Riverside Village, Pasig",
+    surface: "hard",
+    indoor: false,
+    emoji: "🌊",
+    hourlyRate: 550,
+    lat: 14.5750,
+    lng: 121.0820,
+  },
+
+  // MARIKINA
+  {
+    id: "13",
     name: "Rancho Uno Tennis Club",
     location: "Stallion St, Rancho Estate 1, Marikina",
     surface: "hard",
@@ -88,5 +156,68 @@ export const courts: Court[] = [
     hourlyRate: 100,
     lat: 14.6407,
     lng: 121.1012,
+  },
+
+  // MUNTINLUPA
+  {
+    id: "14",
+    name: "Hillsborough Indoor Tennis Court",
+    location: "Buckingham, Cupang, Muntinlupa",
+    surface: "hard",
+    indoor: true,
+    emoji: "🏔️",
+    hourlyRate: 300,
+    lat: 14.4150,
+    lng: 121.0430,
+  },
+  {
+    id: "15",
+    name: "Alabang Country Club Tennis",
+    location: "Country Club Drive, Alabang, Muntinlupa",
+    surface: "hard",
+    indoor: false,
+    emoji: "🏌️",
+    hourlyRate: 400,
+    lat: 14.4200,
+    lng: 121.0350,
+  },
+
+  // MANDALUYONG
+  {
+    id: "16",
+    name: "Wack Wack Tennis Courts",
+    location: "Wack Wack Rd, Mandaluyong",
+    surface: "clay",
+    indoor: false,
+    emoji: "🌳",
+    hourlyRate: 350,
+    lat: 14.5770,
+    lng: 121.0450,
+  },
+
+  // SAN JUAN
+  {
+    id: "17",
+    name: "San Juan Arena Tennis Court",
+    location: "N. Domingo St, San Juan City",
+    surface: "hard",
+    indoor: false,
+    emoji: "🏀",
+    hourlyRate: 120,
+    lat: 14.6020,
+    lng: 121.0350,
+  },
+
+  // LAS PIÑAS
+  {
+    id: "18",
+    name: "Manila Southwoods Tennis Courts",
+    location: "Southwoods City, Carmona / Las Piñas",
+    surface: "hard",
+    indoor: false,
+    emoji: "🌲",
+    hourlyRate: 160,
+    lat: 14.3550,
+    lng: 121.0590,
   },
 ];

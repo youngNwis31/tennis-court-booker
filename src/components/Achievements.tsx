@@ -61,8 +61,8 @@ export function calculateBadges(bookings: Booking[], reviews: Review[]): Badge[]
       id: "all-courts",
       emoji: "👑",
       name: "Court Collector",
-      description: "Book at all 6 courts",
-      unlocked: uniqueCourts.size >= 6,
+      description: `Book at all ${courts.length} courts`,
+      unlocked: uniqueCourts.size >= courts.length,
     },
     {
       id: "weekend-warrior",
