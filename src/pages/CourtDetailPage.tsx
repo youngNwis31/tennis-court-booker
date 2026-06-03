@@ -12,6 +12,8 @@ import { useToast } from "../components/Toast";
 import { PlayingTips } from "../components/PlayingTips";
 import { ShareBooking } from "../components/ShareBooking";
 import { FavoriteButton } from "../components/FavoriteButton";
+import { SatelliteView } from "../components/SatelliteView";
+import { getSatelliteImageUrl } from "../lib/satellite";
 
 export function CourtDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -66,7 +68,7 @@ export function CourtDetailPage() {
 
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
         {court.photos.length > 0 ? (
-          <PhotoGallery photos={court.photos} alt={court.name} />
+          <PhotoGallery photos={[...court.photos, getSatelliteImageUrl(court.lat, court.lng, 17)]} alt={court.name} />
         ) : (
           <div className="h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-8xl">
             {court.emoji}
@@ -96,6 +98,7 @@ export function CourtDetailPage() {
 
       <PlayingTips court={court} selectedHour={selectedHour} />
       <WeatherBanner court={court} />
+      <SatelliteView court={court} />
       <AvailabilityHeatmap courtId={court.id} />
 
       {confirmed && (

@@ -3,6 +3,7 @@ import type { Court } from "../types";
 import { useCourtReviews } from "../hooks/useReviews";
 import { StarRating } from "./StarRating";
 import { FavoriteButton } from "./FavoriteButton";
+import { getSatelliteImageUrl } from "../lib/satellite";
 
 const surfaceColors: Record<Court["surface"], string> = {
   hard: "bg-blue-100 text-blue-700",
@@ -17,26 +18,34 @@ interface Props {
 
 export function CourtCard({ court, distance }: Props) {
   const { reviews, avgRating } = useCourtReviews(court.id);
+  const satelliteUrl = getSatelliteImageUrl(court.lat, court.lng, 17);
 
   return (
     <Link
       to={`/court/${court.id}`}
       className="group block bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
     >
-      {/* Photo with gradient overlay */}
+      {/* Photo with satellite overlay */}
       <div className="relative h-44 overflow-hidden">
-        {court.photos.length > 0 ? (
-          <img
-            src={court.photos[0]}
-            alt={court.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-6xl">
-            {court.emoji}
-          </div>
-        )}
+        {/* Main photo */}
+        <img
+          src={court.photos[0] || satelliteUrl}
+          alt={court.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+        {/* Satellite thumbnail in corner */}
+        <div className="absolute bottom-3 right-3 w-16 h-16 rounded-lg overflow-hidden border-2 border-white/70 shadow-lg">
+          <img
+            src={satelliteUrl}
+            alt={`${court.name} satellite view`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+            <span className="text-[8px] text-white font-bold">📍 LIVE</span>
+          </div>
+        </div>
 
         {/* Price badge + Favorite */}
         <div className="absolute top-3 right-3 flex items-center gap-2">
@@ -54,7 +63,7 @@ export function CourtCard({ court, distance }: Props) {
         )}
 
         {/* Court name on photo */}
-        <div className="absolute bottom-3 left-3 right-3">
+        <div className="absolute bottom-3 left-3 right-20">
           <h3 className="font-bold text-white text-lg drop-shadow-lg leading-tight">{court.name}</h3>
           <p className="text-white/80 text-sm mt-0.5">{court.location}</p>
         </div>
