@@ -22,8 +22,8 @@ export function HomePage() {
   return (
     <div>
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Find a Court</h1>
-        <p className="text-gray-500 mt-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Find a Court</h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-2">
           Browse available tennis courts and book your next session
         </p>
       </div>
