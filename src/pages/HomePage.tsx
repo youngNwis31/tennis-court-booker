@@ -71,11 +71,27 @@ export function HomePage() {
 
   return (
     <div>
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Find a Court</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-2">
-          {courts.length} tennis courts across Metro Manila
-        </p>
+      {/* Hero Section */}
+      <div className="relative rounded-2xl overflow-hidden mb-8 bg-gradient-to-r from-emerald-600 to-teal-500 p-8 md:p-12">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-4 right-8 text-[120px] leading-none">🎾</div>
+          <div className="absolute bottom-2 left-12 text-[80px] leading-none">🏟️</div>
+        </div>
+        <div className="relative">
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
+            Find Your Perfect Court
+          </h1>
+          <p className="text-emerald-100 mt-2 text-lg">
+            {courts.length} tennis courts across Metro Manila — book in seconds
+          </p>
+          <div className="flex flex-wrap gap-3 mt-4 text-sm text-white/80">
+            <span>🏙️ {CITIES.length - 1} cities</span>
+            <span>•</span>
+            <span>🏢 {courts.filter(c => c.indoor).length} indoor courts</span>
+            <span>•</span>
+            <span>💰 From ₱{Math.min(...courts.map(c => c.hourlyRate))}/hr</span>
+          </div>
+        </div>
       </div>
 
       <SmartRecommendations />

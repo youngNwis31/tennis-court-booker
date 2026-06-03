@@ -1,15 +1,29 @@
 import type { Court } from "../types";
 
-// Free tennis court photos from Unsplash
-const photos = {
-  hard1: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop",
-  hard2: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=600&h=400&fit=crop",
-  hard3: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?w=600&h=400&fit=crop",
-  clay1: "https://images.unsplash.com/photo-1602211844066-d3bb556e983b?w=600&h=400&fit=crop",
-  grass1: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=600&h=400&fit=crop",
-  indoor1: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop",
-  indoor2: "https://images.unsplash.com/photo-1617883861744-13b534e1a5e5?w=600&h=400&fit=crop",
-  court1: "https://images.unsplash.com/photo-1529926706528-db9e5010cd3e?w=600&h=400&fit=crop",
+// Curated free photos matching each court type
+const img = {
+  // Outdoor hard courts
+  rizal: "https://images.unsplash.com/photo-1622163642998-1ea32b0bbc67?w=800&h=500&fit=crop",
+  ccp: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=800&h=500&fit=crop",
+  pca: "https://images.unsplash.com/photo-1627246939899-23f10c79c2f7?w=800&h=500&fit=crop",
+  elorde: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?w=800&h=500&fit=crop",
+  marine: "https://images.unsplash.com/photo-1529926706528-db9e5010cd3e?w=800&h=500&fit=crop",
+  up: "https://images.unsplash.com/photo-1542144582-1ba00456b5e3?w=800&h=500&fit=crop",
+  rancho: "https://images.unsplash.com/photo-1613919517632-20f1e0577d68?w=800&h=500&fit=crop",
+  riverside: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&h=500&fit=crop",
+  sanjuan: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&h=500&fit=crop",
+  southwoods: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=500&fit=crop",
+  alabang: "https://images.unsplash.com/photo-1545809627-a6b308464bb1?w=800&h=500&fit=crop",
+  // Indoor courts
+  makati: "https://images.unsplash.com/photo-1617883861744-13b534e1a5e5?w=800&h=500&fit=crop",
+  kerry: "https://images.unsplash.com/photo-1584280947009-bec950238e21?w=800&h=500&fit=crop",
+  meralco: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&h=500&fit=crop",
+  hillsborough: "https://images.unsplash.com/photo-1551773148-efc7bfc45e94?w=800&h=500&fit=crop",
+  // Clay courts
+  mwss: "https://images.unsplash.com/photo-1602211844066-d3bb556e983b?w=800&h=500&fit=crop",
+  wackwack: "https://images.unsplash.com/photo-1612534847738-b3af9bc31f0c?w=800&h=500&fit=crop",
+  // Grass
+  ascott: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&h=500&fit=crop",
 };
 
 export const courts: Court[] = [
@@ -25,7 +39,7 @@ export const courts: Court[] = [
     hourlyRate: 600,
     lat: 14.5631,
     lng: 120.9889,
-    photos: [photos.hard1, photos.court1],
+    photos: [img.rizal, img.ccp],
   },
   {
     id: "2",
@@ -38,7 +52,7 @@ export const courts: Court[] = [
     hourlyRate: 300,
     lat: 14.5517,
     lng: 120.9817,
-    photos: [photos.hard2, photos.hard3],
+    photos: [img.ccp, img.pca],
   },
   {
     id: "3",
@@ -51,9 +65,8 @@ export const courts: Court[] = [
     hourlyRate: 200,
     lat: 14.5780,
     lng: 120.9920,
-    photos: [photos.hard3, photos.court1],
+    photos: [img.pca, img.rizal],
   },
-
   // MAKATI
   {
     id: "4",
@@ -66,7 +79,7 @@ export const courts: Court[] = [
     hourlyRate: 150,
     lat: 14.5609,
     lng: 121.0233,
-    photos: [photos.indoor1, photos.indoor2],
+    photos: [img.makati, img.hillsborough],
   },
   {
     id: "5",
@@ -79,9 +92,8 @@ export const courts: Court[] = [
     hourlyRate: 500,
     lat: 14.5510,
     lng: 121.0245,
-    photos: [photos.grass1, photos.hard1],
+    photos: [img.ascott, img.alabang],
   },
-
   // QUEZON CITY
   {
     id: "6",
@@ -94,7 +106,7 @@ export const courts: Court[] = [
     hourlyRate: 100,
     lat: 14.6504,
     lng: 121.0748,
-    photos: [photos.clay1, photos.court1],
+    photos: [img.mwss, img.wackwack],
   },
   {
     id: "7",
@@ -107,9 +119,8 @@ export const courts: Court[] = [
     hourlyRate: 150,
     lat: 14.6538,
     lng: 121.0685,
-    photos: [photos.hard2, photos.hard1],
+    photos: [img.up, img.marine],
   },
-
   // PARAÑAQUE
   {
     id: "8",
@@ -122,9 +133,8 @@ export const courts: Court[] = [
     hourlyRate: 140,
     lat: 14.4793,
     lng: 121.0198,
-    photos: [photos.hard3, photos.court1],
+    photos: [img.elorde, img.rancho],
   },
-
   // TAGUIG / BGC
   {
     id: "9",
@@ -137,7 +147,7 @@ export const courts: Court[] = [
     hourlyRate: 1500,
     lat: 14.5547,
     lng: 121.0509,
-    photos: [photos.indoor2, photos.indoor1],
+    photos: [img.kerry, img.meralco],
   },
   {
     id: "10",
@@ -150,9 +160,8 @@ export const courts: Court[] = [
     hourlyRate: 60,
     lat: 14.5340,
     lng: 121.0490,
-    photos: [photos.hard1, photos.hard2],
+    photos: [img.marine, img.elorde],
   },
-
   // PASIG
   {
     id: "11",
@@ -165,7 +174,7 @@ export const courts: Court[] = [
     hourlyRate: 200,
     lat: 14.5872,
     lng: 121.0615,
-    photos: [photos.indoor1, photos.hard3],
+    photos: [img.meralco, img.makati],
   },
   {
     id: "12",
@@ -178,9 +187,8 @@ export const courts: Court[] = [
     hourlyRate: 550,
     lat: 14.5750,
     lng: 121.0820,
-    photos: [photos.hard2, photos.court1],
+    photos: [img.riverside, img.up],
   },
-
   // MARIKINA
   {
     id: "13",
@@ -193,9 +201,8 @@ export const courts: Court[] = [
     hourlyRate: 100,
     lat: 14.6407,
     lng: 121.1012,
-    photos: [photos.hard3, photos.hard1],
+    photos: [img.rancho, img.sanjuan],
   },
-
   // MUNTINLUPA
   {
     id: "14",
@@ -208,7 +215,7 @@ export const courts: Court[] = [
     hourlyRate: 300,
     lat: 14.4150,
     lng: 121.0430,
-    photos: [photos.indoor2, photos.indoor1],
+    photos: [img.hillsborough, img.kerry],
   },
   {
     id: "15",
@@ -221,9 +228,8 @@ export const courts: Court[] = [
     hourlyRate: 400,
     lat: 14.4200,
     lng: 121.0350,
-    photos: [photos.hard1, photos.grass1],
+    photos: [img.alabang, img.southwoods],
   },
-
   // MANDALUYONG
   {
     id: "16",
@@ -236,9 +242,8 @@ export const courts: Court[] = [
     hourlyRate: 350,
     lat: 14.5770,
     lng: 121.0450,
-    photos: [photos.clay1, photos.hard2],
+    photos: [img.wackwack, img.mwss],
   },
-
   // SAN JUAN
   {
     id: "17",
@@ -251,9 +256,8 @@ export const courts: Court[] = [
     hourlyRate: 120,
     lat: 14.6020,
     lng: 121.0350,
-    photos: [photos.hard2, photos.court1],
+    photos: [img.sanjuan, img.riverside],
   },
-
   // LAS PIÑAS
   {
     id: "18",
@@ -266,6 +270,6 @@ export const courts: Court[] = [
     hourlyRate: 160,
     lat: 14.3550,
     lng: 121.0590,
-    photos: [photos.court1, photos.hard3],
+    photos: [img.southwoods, img.alabang],
   },
 ];
