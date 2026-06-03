@@ -8,6 +8,7 @@ import { AuthPage } from "./pages/AuthPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ChatBot } from "./components/ChatBot";
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
               />
             </Routes>
           </main>
+          <ChatBot />
         </div>
       </AuthProvider>
     </BrowserRouter>
