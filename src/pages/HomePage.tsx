@@ -5,6 +5,7 @@ import type { Court } from "../types";
 import { SmartRecommendations } from "../components/SmartRecommendations";
 import { OptimalSlotFinder } from "../components/OptimalSlotFinder";
 import { PriceAlert } from "../components/PriceAlert";
+import { BookingCountdown } from "../components/BookingCountdown";
 
 const SURFACES: Array<Court["surface"] | "all"> = ["all", "hard", "clay", "grass"];
 const CITIES = ["all", ...Array.from(new Set(courts.map((c) => c.city))).sort()];
@@ -96,6 +97,7 @@ export function HomePage() {
         </div>
       </div>
 
+      <BookingCountdown />
       <SmartRecommendations />
       <OptimalSlotFinder />
       <PriceAlert />

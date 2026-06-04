@@ -14,6 +14,7 @@ import { ShareBooking } from "../components/ShareBooking";
 import { FavoriteButton } from "../components/FavoriteButton";
 import { SatelliteView } from "../components/SatelliteView";
 import { getSatelliteImageUrl } from "../lib/satellite";
+import { EquipmentRental } from "../components/EquipmentRental";
 
 export function CourtDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -159,6 +160,7 @@ export function CourtDetailPage() {
 
         {selectedHour !== null && (
           <div className="mt-6 pt-6 border-t border-gray-200">
+            <EquipmentRental />
             {user ? (
               <button
                 onClick={handleBook}

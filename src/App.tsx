@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { ToastProvider } from "./components/Toast";
+import { LanguageProvider } from "./context/LanguageContext";
 import { Navbar } from "./components/Navbar";
 import { HomePage } from "./pages/HomePage";
 import { CourtDetailPage } from "./pages/CourtDetailPage";
@@ -23,6 +24,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
+        <LanguageProvider>
         <AuthProvider>
           <ToastProvider>
           <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
@@ -83,6 +85,7 @@ export default function App() {
           </div>
           </ToastProvider>
         </AuthProvider>
+        </LanguageProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

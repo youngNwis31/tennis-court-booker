@@ -2,12 +2,14 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Navbar() {
   const { pathname } = useLocation();
   const { user, signOut } = useAuth();
   const { dark, toggle } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { lang, setLang } = useLanguage();
 
   const linkClass = (path: string) =>
     `px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
@@ -48,8 +50,14 @@ export function Navbar() {
           )}
           {!user && <Link to="/auth" className={linkClass("/auth")}>Sign In</Link>}
           <button
+            onClick={() => setLang(lang === "en" ? "fil" : "en")}
+            className="px-2 py-2 rounded-lg text-xs font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-500 dark:text-gray-400"
+          >
+            {lang === "en" ? "🇵🇭" : "🇺🇸"}
+          </button>
+          <button
             onClick={toggle}
-            className="ml-1 px-2 py-2 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="px-2 py-2 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
             {dark ? "☀️" : "🌙"}
           </button>
