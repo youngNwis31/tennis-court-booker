@@ -3,7 +3,6 @@ import type { Court } from "../types";
 import { useCourtReviews } from "../hooks/useReviews";
 import { StarRating } from "./StarRating";
 import { FavoriteButton } from "./FavoriteButton";
-import { getSatelliteImageUrl } from "../lib/satellite";
 
 const surfaceColors: Record<Court["surface"], string> = {
   hard: "bg-blue-100 text-blue-700",
@@ -18,7 +17,6 @@ interface Props {
 
 export function CourtCard({ court, distance }: Props) {
   const { reviews, avgRating } = useCourtReviews(court.id);
-  const satelliteUrl = getSatelliteImageUrl(court.lat, court.lng, 17);
 
   return (
     <Link
@@ -29,23 +27,11 @@ export function CourtCard({ court, distance }: Props) {
       <div className="relative h-44 overflow-hidden">
         {/* Main photo */}
         <img
-          src={court.photos[0] || satelliteUrl}
+          src={court.photos[0]}
           alt={court.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-        {/* Satellite thumbnail in corner */}
-        <div className="absolute bottom-3 right-3 w-16 h-16 rounded-lg overflow-hidden border-2 border-white/70 shadow-lg">
-          <img
-            src={satelliteUrl}
-            alt={`${court.name} satellite view`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-            <span className="text-[8px] text-white font-bold">📍 LIVE</span>
-          </div>
-        </div>
 
         {/* Price badge + Favorite */}
         <div className="absolute top-3 right-3 flex items-center gap-2">
