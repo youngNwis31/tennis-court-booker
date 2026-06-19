@@ -9,7 +9,6 @@ export interface Court {
   hourlyRate: number;
   lat: number;
   lng: number;
-  photos: string[];
 }
 
 export interface Review {

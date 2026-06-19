@@ -23,17 +23,12 @@ export function CourtCard({ court, distance }: Props) {
       to={`/court/${court.id}`}
       className="group block bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
     >
-      {/* Photo with satellite overlay */}
-      <div className="relative h-44 overflow-hidden">
-        {/* Main photo */}
-        <img
-          src={court.photos[0]}
-          alt={court.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+      <div className="relative h-44 overflow-hidden bg-gradient-to-br from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20">
+        <div className="absolute inset-0 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform duration-500">
+          {court.emoji}
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-        {/* Price badge + Favorite */}
         <div className="absolute top-3 right-3 flex items-center gap-2">
           <FavoriteButton courtId={court.id} />
           <div className="px-3 py-1 rounded-full bg-emerald-500 text-white text-sm font-bold shadow-lg">
@@ -41,14 +36,12 @@ export function CourtCard({ court, distance }: Props) {
           </div>
         </div>
 
-        {/* Indoor badge */}
         {court.indoor && (
           <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-purple-500 text-white text-xs font-medium">
             Indoor
           </div>
         )}
 
-        {/* Court name on photo */}
         <div className="absolute bottom-3 left-3 right-20">
           <h3 className="font-bold text-white text-lg drop-shadow-lg leading-tight">{court.name}</h3>
           <p className="text-white/80 text-sm mt-0.5">{court.location}</p>

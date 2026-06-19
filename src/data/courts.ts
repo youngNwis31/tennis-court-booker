@@ -1,37 +1,5 @@
 import type { Court } from "../types";
 
-// Real photos sourced from Wikimedia Commons, official websites, and public sources
-// Where real photos aren't available, high-quality representative photos are used
-const img = {
-  // REAL PHOTOS - Wikimedia Commons (public domain / Creative Commons)
-  rizalTennis: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Malate_%28Metro_Manila%3B_2023-08-03%29_19.jpg/800px-Malate_%28Metro_Manila%3B_2023-08-03%29_19.jpg",
-  rizalBirdseye: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Rizal_Memorial_Sports_Complex_birdseye.jpg/800px-Rizal_Memorial_Sports_Complex_birdseye.jpg",
-  rizalStadium: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Rizal_Memorial_Sports_Complex_-_Your_National_Stadium%2C_Malate%2C_Manila%2C_Jun_2025.jpg/800px-Rizal_Memorial_Sports_Complex_-_Your_National_Stadium%2C_Malate%2C_Manila%2C_Jun_2025.jpg",
-  wackwackClubhouse: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Wack_Wack_Golf_and_Country_Club_clubhouse.jpg/800px-Wack_Wack_Golf_and_Country_Club_clubhouse.jpg",
-  wackwackFairways: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wack_Wack_Golf_and_Country_Club_fairways.jpg/800px-Wack_Wack_Golf_and_Country_Club_fairways.jpg",
-  wackwackAerial: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Wack_Wack_Golf_%26_Country_Club_from_Ortigas_Center%2C_Nov_2025.jpg/800px-Wack_Wack_Golf_%26_Country_Club_from_Ortigas_Center%2C_Nov_2025.jpg",
-  ccpTennis: "https://live.staticflickr.com/5141/5639681604_caa2c0f7bd.jpg",
-
-  // Real venue photos from official websites
-  kerrySports: "https://static.wixstatic.com/media/487cfc_e959300389f74b93a5cd8f606bc0cf34~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85,enc_avif,quality_auto/ShangrilaTheFort-0218_edited_edited_edit.jpg",
-  kerrySports2: "https://courtslots.ph/cdn/shop/products/KerrySports.jpg?v=1672594879",
-
-  // Representative photos for courts without public photos
-  hardOutdoor1: "https://images.unsplash.com/photo-1622163642998-1ea32b0bbc67?w=800&h=500&fit=crop",
-  hardOutdoor2: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=800&h=500&fit=crop",
-  hardOutdoor3: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?w=800&h=500&fit=crop",
-  hardOutdoor4: "https://images.unsplash.com/photo-1627246939899-23f10c79c2f7?w=800&h=500&fit=crop",
-  hardOutdoor5: "https://images.unsplash.com/photo-1542144582-1ba00456b5e3?w=800&h=500&fit=crop",
-  hardOutdoor6: "https://images.unsplash.com/photo-1529926706528-db9e5010cd3e?w=800&h=500&fit=crop",
-  indoor1: "https://images.unsplash.com/photo-1617883861744-13b534e1a5e5?w=800&h=500&fit=crop",
-  indoor2: "https://images.unsplash.com/photo-1584280947009-bec950238e21?w=800&h=500&fit=crop",
-  indoor3: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&h=500&fit=crop",
-  clay1: "https://images.unsplash.com/photo-1602211844066-d3bb556e983b?w=800&h=500&fit=crop",
-  grass1: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&h=500&fit=crop",
-  premium1: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=500&fit=crop",
-  premium2: "https://images.unsplash.com/photo-1545809627-a6b308464bb1?w=800&h=500&fit=crop",
-};
-
 export const courts: Court[] = [
   {
     id: "1",
@@ -44,7 +12,6 @@ export const courts: Court[] = [
     hourlyRate: 600,
     lat: 14.5631,
     lng: 120.9889,
-    photos: [img.rizalTennis, img.rizalBirdseye, img.rizalStadium],
   },
   {
     id: "2",
@@ -57,7 +24,6 @@ export const courts: Court[] = [
     hourlyRate: 300,
     lat: 14.5517,
     lng: 120.9817,
-    photos: [img.ccpTennis, img.hardOutdoor2],
   },
   {
     id: "3",
@@ -70,7 +36,6 @@ export const courts: Court[] = [
     hourlyRate: 200,
     lat: 14.5780,
     lng: 120.9920,
-    photos: [img.hardOutdoor4, img.hardOutdoor3],
   },
   {
     id: "4",
@@ -83,7 +48,6 @@ export const courts: Court[] = [
     hourlyRate: 150,
     lat: 14.5609,
     lng: 121.0233,
-    photos: [img.indoor1, img.indoor3],
   },
   {
     id: "5",
@@ -96,7 +60,6 @@ export const courts: Court[] = [
     hourlyRate: 500,
     lat: 14.5510,
     lng: 121.0245,
-    photos: [img.grass1, img.premium2],
   },
   {
     id: "6",
@@ -109,7 +72,6 @@ export const courts: Court[] = [
     hourlyRate: 100,
     lat: 14.6504,
     lng: 121.0748,
-    photos: [img.clay1, img.hardOutdoor6],
   },
   {
     id: "7",
@@ -122,7 +84,6 @@ export const courts: Court[] = [
     hourlyRate: 150,
     lat: 14.6538,
     lng: 121.0685,
-    photos: [img.hardOutdoor5, img.hardOutdoor1],
   },
   {
     id: "8",
@@ -135,7 +96,6 @@ export const courts: Court[] = [
     hourlyRate: 140,
     lat: 14.4793,
     lng: 121.0198,
-    photos: [img.hardOutdoor3, img.hardOutdoor6],
   },
   {
     id: "9",
@@ -148,7 +108,6 @@ export const courts: Court[] = [
     hourlyRate: 1500,
     lat: 14.5547,
     lng: 121.0509,
-    photos: [img.kerrySports, img.kerrySports2],
   },
   {
     id: "10",
@@ -161,7 +120,6 @@ export const courts: Court[] = [
     hourlyRate: 60,
     lat: 14.5340,
     lng: 121.0490,
-    photos: [img.hardOutdoor6, img.hardOutdoor1],
   },
   {
     id: "11",
@@ -174,7 +132,6 @@ export const courts: Court[] = [
     hourlyRate: 200,
     lat: 14.5872,
     lng: 121.0615,
-    photos: [img.indoor3, img.indoor1],
   },
   {
     id: "12",
@@ -187,7 +144,6 @@ export const courts: Court[] = [
     hourlyRate: 550,
     lat: 14.5750,
     lng: 121.0820,
-    photos: [img.hardOutdoor2, img.hardOutdoor5],
   },
   {
     id: "13",
@@ -200,7 +156,6 @@ export const courts: Court[] = [
     hourlyRate: 100,
     lat: 14.6407,
     lng: 121.1012,
-    photos: [img.hardOutdoor1, img.hardOutdoor4],
   },
   {
     id: "14",
@@ -213,7 +168,6 @@ export const courts: Court[] = [
     hourlyRate: 300,
     lat: 14.4150,
     lng: 121.0430,
-    photos: [img.indoor2, img.indoor1],
   },
   {
     id: "15",
@@ -226,7 +180,6 @@ export const courts: Court[] = [
     hourlyRate: 400,
     lat: 14.4200,
     lng: 121.0350,
-    photos: [img.premium2, img.premium1],
   },
   {
     id: "16",
@@ -239,7 +192,6 @@ export const courts: Court[] = [
     hourlyRate: 350,
     lat: 14.5770,
     lng: 121.0450,
-    photos: [img.wackwackAerial, img.wackwackClubhouse, img.wackwackFairways],
   },
   {
     id: "17",
@@ -252,7 +204,6 @@ export const courts: Court[] = [
     hourlyRate: 120,
     lat: 14.6020,
     lng: 121.0350,
-    photos: [img.hardOutdoor4, img.hardOutdoor2],
   },
   {
     id: "18",
@@ -265,6 +216,5 @@ export const courts: Court[] = [
     hourlyRate: 160,
     lat: 14.3550,
     lng: 121.0590,
-    photos: [img.premium1, img.hardOutdoor3],
   },
 ];

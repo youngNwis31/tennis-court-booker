@@ -155,11 +155,9 @@ export function QuizPage() {
                 </div>
               )}
               <div className="relative">
-                <img
-                  src={court.photos[0]}
-                  alt={court.name}
-                  className="w-24 h-24 rounded-xl object-cover"
-                />
+                <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20 flex items-center justify-center text-4xl">
+                  {court.emoji}
+                </div>
                 {i === 0 && (
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow">
                     1
