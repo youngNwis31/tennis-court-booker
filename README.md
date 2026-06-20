@@ -2,7 +2,7 @@
 
 A full-stack web application for browsing and booking tennis courts across Metro Manila. Built with React, Supabase, and Tailwind CSS.
 
-**Live Demo:** [tenniscourtbooker.netlify.app](https://tenniscourtbooker.netlify.app)
+**Live Demo:** [courtbook-ph.netlify.app](https://courtbook-ph.netlify.app)
 
 ---
 
