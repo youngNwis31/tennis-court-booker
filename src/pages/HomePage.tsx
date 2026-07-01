@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { courts } from "../data/courts";
 import { CourtCard } from "../components/CourtCard";
 import type { Court } from "../types";
@@ -6,19 +6,11 @@ import { SmartRecommendations } from "../components/SmartRecommendations";
 import { OptimalSlotFinder } from "../components/OptimalSlotFinder";
 import { PriceAlert } from "../components/PriceAlert";
 import { BookingCountdown } from "../components/BookingCountdown";
+import { useGeolocation } from "../hooks/useGeolocation";
+import { haversineDistance } from "../services/geo";
 
 const SURFACES: Array<Court["surface"] | "all"> = ["all", "hard", "clay", "grass"];
 const CITIES = ["all", ...Array.from(new Set(courts.map((c) => c.city))).sort()];
-
-function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
-  const R = 6371; // km
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLng = ((lng2 - lng1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
 
 type SortOption = "default" | "price-low" | "price-high" | "nearest";
 
@@ -27,25 +19,7 @@ export function HomePage() {
   const [surface, setSurface] = useState<Court["surface"] | "all">("all");
   const [city, setCity] = useState("all");
   const [sort, setSort] = useState<SortOption>("default");
-  const [userLat, setUserLat] = useState<number | null>(null);
-  const [userLng, setUserLng] = useState<number | null>(null);
-  const [locating, setLocating] = useState(false);
-
-  // Get user location
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      setLocating(true);
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setUserLat(pos.coords.latitude);
-          setUserLng(pos.coords.longitude);
-          setLocating(false);
-        },
-        () => setLocating(false),
-        { timeout: 5000 }
-      );
-    }
-  }, []);
+  const { lat: userLat, lng: userLng, locating } = useGeolocation();
 
   const getDistance = (court: Court): number | null => {
     if (userLat == null || userLng == null) return null;
@@ -63,7 +37,6 @@ export function HomePage() {
     return matchesSurface && matchesCity && matchesSearch;
   });
 
-  // Sort
   if (sort === "price-low") {
     filtered = [...filtered].sort((a, b) => a.hourlyRate - b.hourlyRate);
   } else if (sort === "price-high") {
@@ -74,7 +47,6 @@ export function HomePage() {
 
   return (
     <div>
-      {/* Hero Section */}
       <div className="relative rounded-2xl overflow-hidden mb-8 bg-gradient-to-r from-emerald-600 to-teal-500 p-8 md:p-12">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-4 right-8 text-[120px] leading-none">🎾</div>
@@ -102,7 +74,6 @@ export function HomePage() {
       <OptimalSlotFinder />
       <PriceAlert />
 
-      {/* Search + Filters */}
       <div className="space-y-4 mb-6">
         <input
           type="text"
@@ -113,7 +84,6 @@ export function HomePage() {
         />
 
         <div className="flex flex-wrap gap-2 items-center">
-          {/* Surface filter */}
           {SURFACES.map((s) => (
             <button
               key={s}
@@ -130,7 +100,6 @@ export function HomePage() {
 
           <span className="text-gray-300 dark:text-gray-600">|</span>
 
-          {/* City filter */}
           <select
             value={city}
             onChange={(e) => setCity(e.target.value)}
@@ -143,7 +112,6 @@ export function HomePage() {
             ))}
           </select>
 
-          {/* Sort */}
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortOption)}
@@ -159,7 +127,6 @@ export function HomePage() {
         </div>
       </div>
 
-      {/* Results count */}
       <p className="text-sm text-gray-400 mb-4">
         {filtered.length} court{filtered.length !== 1 ? "s" : ""} found
       </p>

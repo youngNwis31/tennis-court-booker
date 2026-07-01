@@ -1,10 +1,9 @@
 import { useState, useCallback } from "react";
-
-const STORAGE_KEY = "court-favorites";
+import { STORAGE_KEYS } from "../config/constants";
 
 function loadFavorites(): string[] {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(STORAGE_KEYS.favorites);
     return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
@@ -19,7 +18,7 @@ export function useFavorites() {
       const next = prev.includes(courtId)
         ? prev.filter((id) => id !== courtId)
         : [...prev, courtId];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      localStorage.setItem(STORAGE_KEYS.favorites, JSON.stringify(next));
       return next;
     });
   }, []);

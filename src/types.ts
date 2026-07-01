@@ -1,30 +1,5 @@
-export interface Court {
-  id: string;
-  name: string;
-  location: string;
-  city: string;
-  surface: "hard" | "clay" | "grass";
-  indoor: boolean;
-  emoji: string;
-  hourlyRate: number;
-  lat: number;
-  lng: number;
-}
-
-export interface Review {
-  id: string;
-  user_id: string;
-  court_id: string;
-  rating: number;
-  comment: string;
-  created_at: string;
-}
-
-export interface Booking {
-  id: string;
-  user_id: string;
-  court_id: string;
-  date: string;
-  start_hour: number;
-  created_at: string;
-}
+export type { Court, Surface } from "./types/court";
+export type { Booking, BookingIntent } from "./types/booking";
+export type { Review } from "./types/review";
+export type { DayForecast, WeatherInfo } from "./types/weather";
+export type { Recommendation } from "./types/recommendation";

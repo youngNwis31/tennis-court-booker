@@ -19,8 +19,8 @@ export function WeatherBanner({ court }: Props) {
   );
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
-      <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 mb-6">
+      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
         <span>🌤️</span> 3-Day Weather Forecast
       </h3>
 
@@ -36,17 +36,17 @@ export function WeatherBanner({ court }: Props) {
             <div
               key={day.date}
               className={`rounded-lg p-3 text-center ${
-                rainy ? "bg-blue-50 border border-blue-200" : "bg-gray-50"
+                rainy ? "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700" : "bg-gray-50 dark:bg-gray-700"
               }`}
             >
-              <p className="text-xs text-gray-500">{dateLabel}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{dateLabel}</p>
               <p className="text-2xl my-1">{info.emoji}</p>
-              <p className="text-xs font-medium text-gray-700">{info.label}</p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs font-medium text-gray-700 dark:text-gray-300">{info.label}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 {day.tempMin}° – {day.tempMax}°C
               </p>
               {day.precipProbability > 0 && (
-                <p className="text-xs text-blue-600 mt-1">
+                <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
                   💧 {day.precipProbability}% rain
                 </p>
               )}
@@ -56,8 +56,8 @@ export function WeatherBanner({ court }: Props) {
       </div>
 
       {hasRain && !court.indoor && indoorAlternatives.length > 0 && (
-        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
-          <p className="text-sm text-amber-800 font-medium">
+        <div className="mt-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-3">
+          <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">
             🌧️ Rain expected — consider an indoor court instead:
           </p>
           <div className="flex gap-2 mt-2">
@@ -65,7 +65,7 @@ export function WeatherBanner({ court }: Props) {
               <Link
                 key={c.id}
                 to={`/court/${c.id}`}
-                className="text-sm px-3 py-1.5 bg-white rounded-lg border border-amber-200 text-amber-700 hover:bg-amber-100 transition-colors"
+                className="text-sm px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-amber-200 dark:border-amber-700 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
               >
                 {c.emoji} {c.name}
               </Link>

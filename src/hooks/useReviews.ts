@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import type { Review } from "../types";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../providers/AuthProvider";
+import * as reviewService from "../services/review";
 
 export function useCourtReviews(courtId: string) {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -9,12 +9,8 @@ export function useCourtReviews(courtId: string) {
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
-      .from("reviews")
-      .select("*")
-      .eq("court_id", courtId)
-      .order("created_at", { ascending: false });
-    setReviews(data ?? []);
+    const data = await reviewService.fetchCourtReviews(courtId);
+    setReviews(data);
     setLoading(false);
   }, [courtId]);
 
@@ -22,10 +18,7 @@ export function useCourtReviews(courtId: string) {
     fetchReviews();
   }, [fetchReviews]);
 
-  const avgRating =
-    reviews.length > 0
-      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-      : 0;
+  const avgRating = reviewService.computeAvgRating(reviews);
 
   return { reviews, loading, avgRating, refresh: fetchReviews };
 }
@@ -36,23 +29,13 @@ export function useReviewActions() {
   const addReview = useCallback(
     async (courtId: string, rating: number, comment: string) => {
       if (!user) return { error: "Not authenticated" };
-      const { error } = await supabase.from("reviews").upsert(
-        {
-          user_id: user.id,
-          court_id: courtId,
-          rating,
-          comment,
-        },
-        { onConflict: "user_id,court_id" }
-      );
-      return { error: error?.message ?? null };
+      return reviewService.createReview(user.id, courtId, rating, comment);
     },
     [user]
   );
 
   const deleteReview = useCallback(async (id: string) => {
-    const { error } = await supabase.from("reviews").delete().eq("id", id);
-    return { error: error?.message ?? null };
+    return reviewService.deleteReview(id);
   }, []);
 
   return { addReview, deleteReview };

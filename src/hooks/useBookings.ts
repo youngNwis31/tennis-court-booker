@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import type { Booking } from "../types";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../providers/AuthProvider";
+import * as bookingService from "../services/booking";
 
 export function useCourtBookings(courtId: string, date: string) {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -9,12 +9,8 @@ export function useCourtBookings(courtId: string, date: string) {
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
-      .from("bookings")
-      .select("*")
-      .eq("court_id", courtId)
-      .eq("date", date);
-    setBookings(data ?? []);
+    const data = await bookingService.fetchCourtBookings(courtId, date);
+    setBookings(data);
     setLoading(false);
   }, [courtId, date]);
 
@@ -42,13 +38,8 @@ export function useUserBookings() {
       return;
     }
     setLoading(true);
-    const { data } = await supabase
-      .from("bookings")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("date", { ascending: true })
-      .order("start_hour", { ascending: true });
-    setBookings(data ?? []);
+    const data = await bookingService.fetchUserBookings(user.id);
+    setBookings(data);
     setLoading(false);
   }, [user]);
 
@@ -65,20 +56,13 @@ export function useBookingActions() {
   const addBooking = useCallback(
     async (courtId: string, date: string, startHour: number) => {
       if (!user) return { error: "Not authenticated" };
-      const { error } = await supabase.from("bookings").insert({
-        user_id: user.id,
-        court_id: courtId,
-        date,
-        start_hour: startHour,
-      });
-      return { error: error?.message ?? null };
+      return bookingService.createBooking(user.id, courtId, date, startHour);
     },
     [user]
   );
 
   const cancelBooking = useCallback(async (id: string) => {
-    const { error } = await supabase.from("bookings").delete().eq("id", id);
-    return { error: error?.message ?? null };
+    return bookingService.deleteBooking(id);
   }, []);
 
   return { addBooking, cancelBooking };

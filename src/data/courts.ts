@@ -1,4 +1,4 @@
-import type { Court } from "../types";
+import type { Court } from "../types/court";
 
 export const courts: Court[] = [
   {

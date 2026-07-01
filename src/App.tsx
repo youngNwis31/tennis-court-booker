@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import { ThemeProvider } from "./context/ThemeContext";
-import { ToastProvider } from "./components/Toast";
-import { LanguageProvider } from "./context/LanguageContext";
+import { AuthProvider } from "./providers/AuthProvider";
+import { ThemeProvider } from "./providers/ThemeProvider";
+import { ToastProvider } from "./providers/ToastProvider";
+import { LanguageProvider } from "./providers/LanguageProvider";
 import { Navbar } from "./components/Navbar";
 import { HomePage } from "./pages/HomePage";
 import { CourtDetailPage } from "./pages/CourtDetailPage";
